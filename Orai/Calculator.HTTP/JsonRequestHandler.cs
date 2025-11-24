@@ -40,7 +40,7 @@ public abstract class JsonRequestHandler<TResponse> : IRequestHandler
             """;
 
         using var writer = new StreamWriter(responseStream, encoding, leaveOpen: true);
-        writer.Write(response);
+        await writer.WriteAsync(response);
 
 
         return true;
