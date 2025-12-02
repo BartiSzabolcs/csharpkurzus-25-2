@@ -14,4 +14,3 @@ scores.Add(new PlayerScore("Lily", 950, "Pacman", DateTime.Now));
 scores.Add(new PlayerScore("Sam", 400, "Tetris", DateTime.Now));
 scores.Add(new PlayerScore("Nina", 850, "Pacman", DateTime.Now));
 scores.Add(new PlayerScore("Rob", 700, "Tetris", DateTime.Now));
-scores.Add(new PlayerScore("Kate", 1000, "Pacman", DateTime.Now));
