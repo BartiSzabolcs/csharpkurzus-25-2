@@ -25,23 +25,20 @@ class Program
 
         while (true)
         {
-            Console.WriteLine("Choose an option:\n1. Get scores of a game\n2. Get sorted list\n3. Print statistics\n4. Group by property\n5. Exit");
-            var choice = Console.ReadLine();
-            if (choice == "5")
-            {
-                break;
-            }
+            Console.WriteLine("Choose an option:\n1. Get scores of a game\n2. Get sorted list\n3. Print statistics\n4. Group by property\n5. Adding data\n6. Exit");
+            string choice = Console.ReadLine();
+
             switch (choice)
             {
                 
                 case "1":
                     Console.WriteLine("Enter the game name:");
-                    var gameName = Console.ReadLine();
+                    string gameName = Console.ReadLine();
                     getScoresOfAGame(gameName);
                     break;
                 case "2":
                     Console.WriteLine("Enter the type of ordering (ascending/descending):");
-                    var typeOfOrdering = Console.ReadLine();
+                    string typeOfOrdering = Console.ReadLine();
                     getSortedList(typeOfOrdering);
                     break;
                 case "3":
@@ -49,7 +46,7 @@ class Program
                     break;
                 case "4":
                     Console.WriteLine("Enter the property to group by (Name/Score/GameName/Date):");
-                    var property = Console.ReadLine();
+                    string property = Console.ReadLine();
                     if (Enum.TryParse<Options>(property, out var option))
                     {
                         GroupBy(option);
@@ -60,6 +57,22 @@ class Program
                     }
                     break;
                 case "5":
+                //needs to be improved its -dry
+                    Console.WriteLine("Enter the name of the player:");
+                    string newName = Console.ReadLine();
+                    Console.WriteLine("Enter the score:");
+                    string newScore = Console.ReadLine();
+                    Console.WriteLine("Enter the game:");
+                    string newGameName = Console.ReadLine();
+                    DateTime newDate = DateTime.Now;
+                    data.Add(new PlayerScore(newName, int.Parse(newScore), newGameName, newDate));
+                    break;
+                case "6":
+                    var options = new JsonSerializerOptions();
+                    options.WriteIndented = true;
+                    string jsonString = JsonSerializer.Serialize(data, options);
+                    File.WriteAllText("scores.json", jsonString);
+
                     return;
                 default:
                     Console.WriteLine("Invalid choice");
@@ -71,13 +84,9 @@ class Program
         getScoresOfAGame("Tetris");
         PrintStatistics();
         GroupBy(Options.Score);
+        
 
-        //var options = new JsonSerializerOptions();
-        //options.WriteIndented = true;
-        //string jsonString = JsonSerializer.Serialize(scores, options);
-
-        // File.WriteAllText("scores.json", jsonString);
-        // Console.WriteLine(jsonString);
+        
     }
 
     static void getScoresOfAGame(string gameName)
