@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Higher;
 
-namespace Higher
+internal record PlayerScore (string Name, int Score, string GameName, DateTime Date)
 {
-    internal record PlayerScore (string Name, int Score, string GameName, DateTime Date);
+    // TODO: Szerintem nem javasolt recor-nak metodusanak lennie. Egy kulon extension method-okat csinalnek hozza
+    public void PrettyPrint()
+    {
+        Console.WriteLine($"{Name} | {Score} | {GameName} | {Date}\n");
+    }
 }
